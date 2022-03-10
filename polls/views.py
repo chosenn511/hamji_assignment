@@ -19,14 +19,21 @@ class IndexView(generic.ListView):
         """Return the last five published questions."""
         response = requests.get(restify("/questions/"))
         questions = response.json()
-        return questions[:5]
+
+        # TODO#2 Show questions that are not yet closed
+        open_questions = []
+        for question in questions:
+            if question["close_date"] is None:
+                open_questions.append(question)
+        open_questions.sort(key=lambda x: x["pub_date"], reverse=True)
+        return open_questions[:5]
 
 
 class DetailView(generic.DetailView):
     model = Question
     template_name = "polls/detail.html"
 
-    # TODO : Raise 404 if no matching question
+    # TODO#1 Raise 404 if no matching question
     def get_object(self, queryset=None):
         pk = self.kwargs.get(self.pk_url_kwarg)
         queryset = self.get_queryset()
