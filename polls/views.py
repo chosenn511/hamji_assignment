@@ -1,5 +1,5 @@
 import requests
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
@@ -25,6 +25,17 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Question
     template_name = "polls/detail.html"
+
+    # TODO : Raise 404 if no matching question
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        queryset = self.get_queryset()
+        try:
+            # Get the single item from the filtered queryset
+            obj = queryset.get(pk=pk)
+        except queryset.model.DoesNotExist:
+            raise Http404("No such question exists.")
+        return obj
 
 
 class ResultsView(generic.DetailView):

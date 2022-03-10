@@ -1,8 +1,6 @@
-# Hamji
+# Recruiting Assignment
 
-Welcome to Tridge sandbox project!
-
-We'd love to collaborate with amazing developers as we drive the development of "Global Sourcing Hub of Food & Agriculture" into the future.
+Welcome to sandbox project!
 
 ## Guidelines
 - Setup project on your local computer
