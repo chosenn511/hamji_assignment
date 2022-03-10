@@ -1,0 +1,6 @@
+**/__pycache__/
+
+.direnv/
+.idea/
+*.DS_Store
+*.python-version
