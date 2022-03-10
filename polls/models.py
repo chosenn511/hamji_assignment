@@ -7,6 +7,7 @@ from django.utils import timezone
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
+    close_date = models.DateTimeField("date closed", blank=True, null=True)
 
     def __str__(self):
         return self.question_text
